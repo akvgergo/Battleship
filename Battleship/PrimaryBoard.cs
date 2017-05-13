@@ -13,6 +13,24 @@ namespace Battleship {
 
         readonly int[] ClassicShipLengths = { 5, 4, 3, 3, 2 };
 
+        public PrimaryTile this[CoordPair cp] {
+            get { return tiles[cp.Y, cp.X]; }
+            set {
+                var old = tiles[cp.Y, cp.X];
+                tiles[cp.Y, cp.X] = value;
+                
+            }
+        }
+
+        public PrimaryTile this[int x, int y] {
+            get { return tiles[y, x]; }
+            set {
+                var old = tiles[y, x];
+                tiles[y, x] = value;
+                BoardChanged?.Invoke(this, new BoardChangedEventArgs(new CoordPair(x, y), old));
+            }
+        }
+
         public void RandomFill(int seed, Difficulty diff) {
             Random r = new Random(seed);
             CoordSet filled;
@@ -127,6 +145,18 @@ namespace Battleship {
                 Console.WriteLine("{0}, {1}, {2}, {3}", item.Location.X, item.Location.Y, item.Length, item.Horizontal);
             }
         }
+
+        public event EventHandler<BoardChangedEventArgs> BoardChanged;
+
+        public class BoardChangedEventArgs : EventArgs {
+            public CoordPair Location { get; }
+            public PrimaryTile OldTile { get; }
+
+            public BoardChangedEventArgs(CoordPair loc, PrimaryTile oldTile) {
+                Location = loc;
+                OldTile = oldTile;
+            }
+        }
     }
 
     public enum PrimaryTile : byte {
@@ -135,6 +165,4 @@ namespace Battleship {
         Miss = 2,
         Hit = 3
     }
-
-
 }

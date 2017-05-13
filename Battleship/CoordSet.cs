@@ -206,6 +206,10 @@ namespace Battleship {
             Array.Copy(GetAllCoords(), 0, array, arrayIndex, Count);
         }
 
+        public void Fill() {
+            fields.FillStorage(ulong.MaxValue);
+        }
+
         IEnumerator IEnumerable.GetEnumerator() {
             throw new NotImplementedException("People using non-generic colletions are either masochists or stupid");
         }

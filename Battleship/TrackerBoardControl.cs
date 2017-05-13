@@ -11,21 +11,20 @@ namespace Battleship {
 
     public class TrackerBoardControl : Control {
 
-        Graphics sourcegraphics;
         TrackerBoard Source;
 
         #region Properties
 
-        Color _hitColor = Color.PaleVioletRed;
+        Color _hitColor = Color.Red;
         Color _missColor = Color.Gray;
         Color _unknownColor = Color.LightBlue;
-        float _lineWidth = 2;
+        float _lineWidth = 3;
 
         public Color HitColor {
             get { return _hitColor; }
             set {
                 _hitColor = value;
-                RePaint();
+                Invalidate();
             }
         }
 
@@ -33,7 +32,7 @@ namespace Battleship {
             get { return _missColor; }
             set {
                 _missColor = value;
-                RePaint();
+                Invalidate();
             }
         }
 
@@ -41,7 +40,7 @@ namespace Battleship {
             get { return _unknownColor; }
             set {
                 _unknownColor = value;
-                RePaint();
+                Invalidate();
             }
         }
 
@@ -49,22 +48,27 @@ namespace Battleship {
             get { return _lineWidth; }
             set {
                 _lineWidth = value;
-                RePaint();
+                Invalidate();
             }
         }
 
         #endregion Properties
 
         public TrackerBoardControl() {
-            sourcegraphics = CreateGraphics();
+            MouseClick += HandleClick;
         }
 
-        protected void RePaint() {
-            OnPaint(new PaintEventArgs(sourcegraphics, new Rectangle(0, 0, Width, Height)));
+        private void HandleClick(object sender, MouseEventArgs e) {
+            CoordPair loc = new CoordPair(e.X / (Width / 10), e.Y / (Width / 10));
+            Console.WriteLine(loc.ToString());
+            Source[loc] = TrackerTile.Hit;
+            Console.WriteLine(Source[loc].ToString());
         }
 
         public void SetSource(TrackerBoard board) {
             Source = board;
+            Source.BoardChanged += (o, e) => Invalidate();
+            Invalidate();
         }
 
         protected override void OnSizeChanged(EventArgs e) {
@@ -78,7 +82,33 @@ namespace Battleship {
             base.OnPaint(e);
             var g = e.Graphics;
 
-            Pen linePen = new Pen(ForeColor, LineWidth);
+            Pen linePen = new Pen(Enabled ? ForeColor : Color.FromArgb(128, ForeColor), LineWidth);
+
+            if (Source != null) {
+                
+                float tileSize = Width / 10f;
+
+                var unknown = new SolidBrush(UnknownColor);
+                var hit = new SolidBrush(HitColor);
+                var miss = new SolidBrush(MissColor);
+
+                for (int x = 0; x < 10; x++) {
+                    for (int y = 0; y < 10; y++) {
+                        switch (Source[x, y]) {
+                            case TrackerTile.Unknown:
+                                g.FillRectangle(unknown, tileSize * x, tileSize * y, tileSize, tileSize);
+                                break;
+                            case TrackerTile.Miss:
+                                g.FillRectangle(miss, tileSize * x, tileSize * y, tileSize, tileSize);
+                                break;
+                            case TrackerTile.Hit:
+                                g.FillRectangle(hit, tileSize * x, tileSize * y, tileSize, tileSize);
+                                break;
+                        }
+                    }
+                }
+            }
+
             g.DrawRectangle(linePen, LineWidth / 2, LineWidth / 2, Width - LineWidth, Height - LineWidth);
 
             for (int i = 1; i < 10; i++) {
@@ -86,12 +116,6 @@ namespace Battleship {
                 g.DrawLine(linePen, loc, 0, loc, Width);
                 g.DrawLine(linePen, 0, loc, Width, loc);
             }
-
-            if (Source == null) return;
-
-
         }
-
-
     }
 }
