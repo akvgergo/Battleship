@@ -6,16 +6,10 @@ using System.Threading.Tasks;
 
 namespace Battleship {
 
-
     public class TrackerBoard {
-        EnemyTile[,] tiles = new EnemyTile[10, 10];
-        public PrimaryBoard Enemy { get; }
+        TrackerTile[,] tiles = new TrackerTile[10, 10];
 
-        public TrackerBoard(PrimaryBoard enemy) {
-            Enemy = enemy;
-        }
-
-        public EnemyTile this[CoordPair C] {
+        public TrackerTile this[CoordPair C] {
             get { return tiles[C.Y, C.X]; }
         }
 
@@ -23,7 +17,7 @@ namespace Battleship {
 
     }
 
-    public enum EnemyTile : byte {
+    public enum TrackerTile : byte {
         Unknown = 0,
         Miss = 1,
         Hit = 2

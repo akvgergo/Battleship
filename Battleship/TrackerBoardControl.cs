@@ -3,29 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
 using System.Drawing;
 
+
 namespace Battleship {
-    partial class BattleshipControl {
 
-        Color _shipColor = Color.LightBlue;
-        Color _hitColor = Color.Pink;
-        Color _missColor = Color.Red;
-        float _lineWidth = 2;
+    public class TrackerBoardControl : Control {
 
-        Graphics _graphics;
+        Graphics sourcegraphics;
+        TrackerBoard Source;
 
         #region Properties
 
-        public Color ShipColor {
-            get { return _shipColor; }
-            set {
-                _shipColor = value;
-                RePaint();
-            }
-        }
+        Color _hitColor = Color.PaleVioletRed;
+        Color _missColor = Color.Gray;
+        Color _unknownColor = Color.LightBlue;
+        float _lineWidth = 2;
 
         public Color HitColor {
             get { return _hitColor; }
@@ -43,6 +37,14 @@ namespace Battleship {
             }
         }
 
+        public Color UnknownColor {
+            get { return _unknownColor; }
+            set {
+                _unknownColor = value;
+                RePaint();
+            }
+        }
+
         public float LineWidth {
             get { return _lineWidth; }
             set {
@@ -51,10 +53,25 @@ namespace Battleship {
             }
         }
 
-        #endregion properties
+        #endregion Properties
+
+        public TrackerBoardControl() {
+            sourcegraphics = CreateGraphics();
+        }
 
         protected void RePaint() {
-            OnPaint(new PaintEventArgs(_graphics, new Rectangle(0, 0, Width, Height)));
+            OnPaint(new PaintEventArgs(sourcegraphics, new Rectangle(0, 0, Width, Height)));
+        }
+
+        public void SetSource(TrackerBoard board) {
+            Source = board;
+        }
+
+        protected override void OnSizeChanged(EventArgs e) {
+            base.OnSizeChanged(e);
+            if (Height != Width) {
+                Height = Width;
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e) {
@@ -70,13 +87,11 @@ namespace Battleship {
                 g.DrawLine(linePen, 0, loc, Width, loc);
             }
 
-            if (TrackingMode) {
-                for (int y = 0; y < 10; y++) {
-                    for (int x = 0; x < 10; x++) {
+            if (Source == null) return;
 
-                    }
-                }
-            }
+
         }
+
+
     }
 }

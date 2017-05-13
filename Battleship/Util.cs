@@ -49,24 +49,6 @@ namespace Battleship {
             [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern int memcmp(byte[] b1, byte[] b2, long count);
 
-        }
-        //Festékes vödör
-        public static void FloodFill(this Bitmap bitmap, Color color, int x, int y) {
-            Color startColor = bitmap.GetPixel(x, y);
-            Stack<Point> pixels = new Stack<Point>(500);
-            pixels.Push(new Point(x, y));
-
-            while (pixels.Count > 0) {
-                var pixel = pixels.Pop();
-                if (bitmap.GetPixel(pixel.X, pixel.Y) == startColor) {
-                    
-                }
-            }
-
-        }
-
-        
+        }   
     }
-
-
 }

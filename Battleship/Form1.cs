@@ -16,7 +16,10 @@ namespace Battleship {
 
         public Form1() {
             InitializeComponent();
-
+            Bitmap bm = new Bitmap(100, 100);
+            for (int i = 0; i < 100; i++) {
+                bm.SetPixel(5, i, Color.Red);
+            }
 
         }
     }

@@ -47,14 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BattleshipControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="BattleshipControl.Drawing.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="BattleshipGame.cs" />
     <Compile Include="BitVector.cs" />
+    <Compile Include="PrimaryBoardControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TrackerBoard.cs" />
     <Compile Include="Coordpair.cs" />
     <Compile Include="CoordSet.cs" />
@@ -68,6 +65,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs" />
+    <Compile Include="TrackerBoardControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Util.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

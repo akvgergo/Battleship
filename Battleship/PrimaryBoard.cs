@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Battleship {
 
     public class PrimaryBoard {
-        FriendlyTile[,] tiles = new FriendlyTile[10, 10];
+        PrimaryTile[,] tiles = new PrimaryTile[10, 10];
         List<Ship> Ships = new List<Ship>(5);
         public int Lives { get; private set; }
 
@@ -74,11 +74,11 @@ namespace Battleship {
             var shipArea = ship.GetOccupiedArea(0).GetAllCoords();
 
             foreach (CoordPair C in shipArea) {
-                if (tiles[C.Y, C.X] == FriendlyTile.Ship) return false;
+                if (tiles[C.Y, C.X] == PrimaryTile.Ship) return false;
             }
 
             foreach (CoordPair C in shipArea) {
-                tiles[C.Y, C.X] = FriendlyTile.Ship;
+                tiles[C.Y, C.X] = PrimaryTile.Ship;
             }
 
             Ships.Add(ship);
@@ -89,12 +89,12 @@ namespace Battleship {
         }
 
         public bool TryHit(CoordPair coord) {
-            if (tiles[coord.Y, coord.X] == FriendlyTile.Ship) {
-                tiles[coord.Y, coord.X] = FriendlyTile.Hit;
+            if (tiles[coord.Y, coord.X] == PrimaryTile.Ship) {
+                tiles[coord.Y, coord.X] = PrimaryTile.Hit;
                 Lives--;
                 return true;
             }
-            tiles[coord.Y, coord.X] = FriendlyTile.Miss;
+            tiles[coord.Y, coord.X] = PrimaryTile.Miss;
             return false;
         }
 
@@ -104,16 +104,16 @@ namespace Battleship {
             for (int y = 0; y < 10; y++) {
                 for (int x = 0; x < 10; x++) {
                     switch (tiles[y, x]) {
-                        case FriendlyTile.Water:
+                        case PrimaryTile.Water:
                             s += "W";
                             break;
-                        case FriendlyTile.Ship:
+                        case PrimaryTile.Ship:
                             s += "S";
                             break;
-                        case FriendlyTile.Miss:
+                        case PrimaryTile.Miss:
                             s += "M";
                             break;
-                        case FriendlyTile.Hit:
+                        case PrimaryTile.Hit:
                             s += "H";
                             break;
                     }
@@ -129,7 +129,7 @@ namespace Battleship {
         }
     }
 
-    public enum FriendlyTile : byte {
+    public enum PrimaryTile : byte {
         Water = 0,
         Ship = 1,
         Miss = 2,
