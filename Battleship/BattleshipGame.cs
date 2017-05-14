@@ -18,7 +18,7 @@ namespace Battleship {
         public bool ControlsBound;
         public int Seed;
 
-        AIMemory memory = new AIMemory();
+        AIMemory mem = new AIMemory();
 
         public Difficulty Difficulty { get; private set; }
         public int Round { get; private set; }
@@ -46,11 +46,16 @@ namespace Battleship {
             }
         }
 
-        public void AIHit() {
+        public void AIMove() {
             switch (Difficulty) {
 
                 case Difficulty.Easy:
-                    if (!memory.FoundShip){
+                    if (!mem.FoundShip) {
+                        var move = mem.getRandomMove();
+                        if (Player.TryHit(move)) {
+                            mem.FoundShip = true;
+                            
+                        }
 
                     }
                     break;
@@ -58,33 +63,6 @@ namespace Battleship {
                     break;
                 case Difficulty.Hard:
                     break;
-            }
-        }
-
-        //Próbálom rendszerezni a dolgokat ebben az istenverte osztályban
-        class AIMemory {
-            public CoordSet PossibleShipLocs;
-            public List<int> ShipsRemaining = new List<int> { 5, 4, 3, 3, 2 };
-            public CoordSet RandomHitCandidates;
-
-            public Random rnd;
-            public bool FoundShip;
-
-            public void GenerateRNGHitCandids() {
-                int smallestShipUnsunk = ShipsRemaining.Min();
-                CoordSet cs = new CoordSet();
-
-                switch (smallestShipUnsunk) {
-                    case 2:
-                        for (int i = 0; i < 100; i += 2) {
-                            cs.Add(new CoordPair(i));
-                        }
-                        break;
-                    case 3:
-
-                        break;
-                    
-                }
             }
         }
     }

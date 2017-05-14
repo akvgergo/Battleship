@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace Battleship {
 
-    public struct Ship {
+    public class Ship {
         public int Length { get; }
         public bool Horizontal { get; }
+        public bool Sank { get { return UndamagedTiles.Count == 0; } }
         public CoordPair Location { get; }
+        public CoordSet UndamagedTiles { get; }
+        public CoordSet DamagedTiles { get; }
+
 
         public Ship(CoordPair loc, int length, bool horizontal) {
             if (length > 5 || length < 2) throw new ArgumentException("Invalid Length");
@@ -21,6 +25,8 @@ namespace Battleship {
             Location = loc;
             Length = length;
             Horizontal = horizontal;
+            UndamagedTiles = GetOccupiedArea(0);
+            DamagedTiles = new CoordSet();
         }
 
         public CoordSet GetOccupiedArea(int range) {
@@ -54,6 +60,14 @@ namespace Battleship {
 
         public override string ToString() {
             return string.Format("{0}, {1}, {2}", Location.ToString(), Length, Horizontal);
+        }
+
+        public bool Hit(CoordPair cp) {
+            if (UndamagedTiles.Remove(cp)) {
+                DamagedTiles.Add(cp);
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -22,7 +22,23 @@ namespace Battleship {
 
             TrackerBoard tb = new TrackerBoard();
             trackerBoardControl1.SetSource(tb);
-            tb[2, 2] = TrackerTile.Miss;
+
+            //for (int i = 0; i < 4; i++) {
+            //    tb[new CoordPair(i, 3 - i)] = TrackerTile.Hit;
+            //    tb[new CoordPair(i + 6, 9 - i)] = TrackerTile.Hit;
+            //}
+            //for (int i = 0; i < 8; i++) {
+            //    tb[new CoordPair(i, 7 - i)] = TrackerTile.Hit;
+            //    tb[new CoordPair(i + 2, 9 - i)] = TrackerTile.Hit;
+            //}
+            for (int i = 0; i < 10; i++) {
+                tb[new CoordPair(i, i)] = TrackerTile.Hit;
+            }
+            for (int i = 0; i < 5; i++) {
+                tb[new CoordPair(5 + i, i)] = TrackerTile.Hit;
+                tb[new CoordPair(i, 5 + i)] = TrackerTile.Hit;
+            }
+
         }
     }
 }

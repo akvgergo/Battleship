@@ -9,8 +9,8 @@ namespace Battleship {
     public class PrimaryBoard {
         PrimaryTile[,] tiles = new PrimaryTile[10, 10];
         List<Ship> Ships = new List<Ship>(5);
-        public int Lives { get; private set; }
-
+        public int Lives { get { return Ships.Select(s => s.UndamagedTiles.Count).Sum(); } }
+        public int Populated { get; set; }
         readonly int[] ClassicShipLengths = { 5, 4, 3, 3, 2 };
 
         public PrimaryTile this[CoordPair cp] {
@@ -18,7 +18,7 @@ namespace Battleship {
             set {
                 var old = tiles[cp.Y, cp.X];
                 tiles[cp.Y, cp.X] = value;
-                
+                BoardChanged?.Invoke(this, new BoardChangedEventArgs(cp, old));
             }
         }
 
@@ -101,49 +101,16 @@ namespace Battleship {
 
             Ships.Add(ship);
 
-            Lives += ship.Length;
-
             return true;
         }
 
         public bool TryHit(CoordPair coord) {
-            if (tiles[coord.Y, coord.X] == PrimaryTile.Ship) {
-                tiles[coord.Y, coord.X] = PrimaryTile.Hit;
-                Lives--;
+            if (this[coord] == PrimaryTile.Ship) {
+                this[coord] = PrimaryTile.Hit;
                 return true;
             }
-            tiles[coord.Y, coord.X] = PrimaryTile.Miss;
+            this[coord] = PrimaryTile.Miss;
             return false;
-        }
-
-        public void DebugPrint() {
-            string s = "";
-
-            for (int y = 0; y < 10; y++) {
-                for (int x = 0; x < 10; x++) {
-                    switch (tiles[y, x]) {
-                        case PrimaryTile.Water:
-                            s += "W";
-                            break;
-                        case PrimaryTile.Ship:
-                            s += "S";
-                            break;
-                        case PrimaryTile.Miss:
-                            s += "M";
-                            break;
-                        case PrimaryTile.Hit:
-                            s += "H";
-                            break;
-                    }
-                }
-                s += "\n";
-            }
-
-            Console.WriteLine(s);
-
-            foreach (var item in Ships) {
-                Console.WriteLine("{0}, {1}, {2}, {3}", item.Location.X, item.Location.Y, item.Length, item.Horizontal);
-            }
         }
 
         public event EventHandler<BoardChangedEventArgs> BoardChanged;

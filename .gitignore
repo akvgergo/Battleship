@@ -65,15 +65,20 @@ Temporary Items
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+## Appró változtatás hogy meglegyen a release .exe
+#[Rr]elease/
+#[Bb]in/
+*.vshost*
+*.config
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
 [Rr]eleases/
 x64/
 x86/
 bld/
-[Bb]in/
+
 [Oo]bj/
 [Ll]og/
 
