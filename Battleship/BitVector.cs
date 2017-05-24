@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ namespace Battleship {
         }
 
         //Nagyon remélem hogy nem fog kelleni
-        public unsafe BitVector(System.Collections.BitArray source) {
+        public unsafe BitVector(BitArray source) {
             StorageBlocks = new ulong[GetStorageLength(source.Length)];
             Length = source.Length;
             int[] srcArray = new int[(source.Length - 1) / 32 + 1];
@@ -66,10 +67,12 @@ namespace Battleship {
         }
 
         public bool GetValue(int index) {
+            if (index >= Length || index < 0) throw new IndexOutOfRangeException("index");
             return (StorageBlocks[index / BlockSize] & (1UL << (index % BlockSize))) != 0;
         }
 
         public void SetValue(int index, bool value) {
+            if (index >= Length || index < 0) throw new IndexOutOfRangeException("index");
             if (value) {
                 StorageBlocks[index / BlockSize] |= (1UL << (index % BlockSize));
             } else {
@@ -210,7 +213,7 @@ namespace Battleship {
         }
 
         public static BitVector Not(BitVector source) {
-            BitVector bv = new BitVector(source.StorageBlocks, source.Length);
+            BitVector bv = source.Copy();
             bv.Not();
             return bv;
         }
@@ -230,15 +233,8 @@ namespace Battleship {
             return bv;
         }
 
-        public void DebugPrint() {
-            for (int i = 0; i < StorageBlocks.Length; i++) {
-                Console.WriteLine(Convert.ToString((long)StorageBlocks[i], 2));
-            }
-        }
-
-        //Nem.
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-            throw new NotImplementedException();
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
     }
 }

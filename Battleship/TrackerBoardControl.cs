@@ -61,7 +61,9 @@ namespace Battleship {
         private void HandleClick(object sender, MouseEventArgs e) {
             CoordPair loc = new CoordPair(e.X / (Width / 10), e.Y / (Width / 10));
             Console.WriteLine(loc.ToString());
-            Source[loc] = TrackerTile.Hit;
+            if (Source[loc] == TrackerTile.Hit) {
+                Source[loc] = TrackerTile.Unknown;
+            } else Source[loc] = TrackerTile.Hit;
             Console.WriteLine(Source[loc].ToString());
         }
 

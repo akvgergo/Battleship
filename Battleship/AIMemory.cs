@@ -29,18 +29,20 @@ namespace Battleship {
                     }
                     break;
                 case 3:
-                    for (int i = 0; i < 99; i += 3) {
-                        cs.Add(new CoordPair(i + 1));
+                    for (int i = 0; i < 10; i++) {
+                        for (int j = 0; j < 10; j++) {
+                            cs.Add(new CoordPair(9 - i, j));
+                        }
                     }
                     break;
                 case 4:
                     for (int i = 0; i < 4; i++) {
-                        cs.Add(new CoordPair(i, 3 - i));
-                        cs.Add(new CoordPair(i + 6, 9 - i));
+                        cs.Add(new CoordPair(i, i + 6));
+                        cs.Add(new CoordPair(i + 6, i));
                     }
                     for (int i = 0; i < 8; i++) {
-                        cs.Add(new CoordPair(i, 7 - i));
-                        cs.Add(new CoordPair(i + 2, 9 - i));
+                        cs.Add(new CoordPair(i, i + 2));
+                        cs.Add(new CoordPair(i + 2, i));
                     }
                     break;
                 case 5:
@@ -58,10 +60,13 @@ namespace Battleship {
             RandomHitCandidates = cs;
         }
 
+        public void GetPossibleShipLocs(CoordPair cp) {
+
+        }
+
         public CoordPair getRandomMove() {
             var all = RandomHitCandidates.GetAllCoords();
             return all[rnd.Next(all.Length)];
         }
-
     }
 }

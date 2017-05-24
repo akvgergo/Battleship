@@ -38,7 +38,7 @@ namespace Battleship {
             ControlsBound = true;
         }
 
-        public void PlayerHit(CoordPair cp) {
+        public void PlayerMove(CoordPair cp) {
             if (AI.TryHit(cp)) {
                 PlayerTracker[cp] = TrackerTile.Hit;
             } else {
@@ -52,6 +52,8 @@ namespace Battleship {
                 case Difficulty.Easy:
                     if (!mem.FoundShip) {
                         var move = mem.getRandomMove();
+                        mem.RandomHitCandidates.Remove(move);
+                        mem.AllMoves.Add(move);
                         if (Player.TryHit(move)) {
                             mem.FoundShip = true;
                             

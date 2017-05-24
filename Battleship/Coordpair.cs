@@ -11,31 +11,26 @@ namespace Battleship {
     /// Egy koordináta. Az index arra szolgál hogy majd hashtable-höz hasonlóan tudjak tárolni egy teljes játékmezőt egy bit sorozatban.
     /// </summary>
     public struct CoordPair {
-        public int X { get; }
-        public int Y { get; }
+        public int X { get { return Index % 10; } }
+        public int Y { get { return Index / 10; } }
         public int Index { get; }
 
         public CoordPair(int x, int y) {
-            if (!IsValidCoords(x, y)) throw new ArgumentException("invalid coordinates");
-            X = x;
-            Y = y;
-            Index = X + Y * 10;
+            if (!IsValidCoord(x, y)) throw new ArgumentException("invalid coordinates");
+            Index = x + y * 10;
         }
 
         public CoordPair(int index) {
-            X = index % 10;
-            Y = index / 10;
             Index = index;
-            if (!IsValidCoords(X, Y)) throw new ArgumentException("invalid coordinates");
-
+            if (!IsValidCoord(X, Y)) throw new ArgumentException("invalid coordinates");
         }
 
-        public static bool IsValidCoords(int x, int y) {
-            return !(x > 9 || x < 0 || y > 9 || y < 0);
+        public static bool IsValidCoord(int x, int y) {
+            return x <= 9 && x >= 0 && y <= 9 && y >= 0;
         }
 
-        public static bool IsValidCoords(int x, int y, out CoordPair s) {
-            if (IsValidCoords(x, y)) {
+        public static bool IsValidCoord(int x, int y, out CoordPair s) {
+            if (IsValidCoord(x, y)) {
                 s = new CoordPair(x, y);
                 return true;
             }

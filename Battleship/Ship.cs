@@ -9,7 +9,7 @@ namespace Battleship {
     public class Ship {
         public int Length { get; }
         public bool Horizontal { get; }
-        public bool Sank { get { return UndamagedTiles.Count == 0; } }
+        public bool Alive { get { return UndamagedTiles.Count != 0; } }
         public CoordPair Location { get; }
         public CoordSet UndamagedTiles { get; }
         public CoordSet DamagedTiles { get; }
@@ -33,12 +33,12 @@ namespace Battleship {
             CoordSet cs = new CoordSet();
             int firstX = Location.X - range;
             int firstY = Location.Y - range;
-            int lastX = Location.X + range + (Horizontal ? Length -1 : 0);
+            int lastX = Location.X + range + (Horizontal ? Length - 1 : 0);
             int lastY = Location.Y + range + (Horizontal ? 0 : Length - 1);
 
             for (int x = firstX; x <= lastX; x++) {
                 for (int y = firstY; y <= lastY; y++) {
-                    if (CoordPair.IsValidCoords(x, y)) cs.Add(new CoordPair(x, y));
+                    if (CoordPair.IsValidCoord(x, y)) cs.Add(new CoordPair(x, y));
                 }
             }
 
@@ -58,16 +58,16 @@ namespace Battleship {
             return new Ship(loc, length, horizontal);
         }
 
-        public override string ToString() {
-            return string.Format("{0}, {1}, {2}", Location.ToString(), Length, Horizontal);
-        }
-
         public bool Hit(CoordPair cp) {
             if (UndamagedTiles.Remove(cp)) {
                 DamagedTiles.Add(cp);
                 return true;
             }
             return false;
+        }
+
+        public override string ToString() {
+            return string.Format("{0}, {1}, {2}", Location, Length, Horizontal);
         }
     }
 }

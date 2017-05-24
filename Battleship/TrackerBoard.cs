@@ -27,6 +27,13 @@ namespace Battleship {
             }
         }
 
+        public void DisplaySet(CoordSet cs) {
+            tiles = new TrackerTile[10, 10];
+            foreach (var item in cs.GetAllCoords()) {
+                this[item] = TrackerTile.Hit;
+            }
+        }
+
         public event EventHandler<BoardChangedEventArgs> BoardChanged;
 
         public class BoardChangedEventArgs : EventArgs {

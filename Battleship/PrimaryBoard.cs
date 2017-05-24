@@ -10,7 +10,7 @@ namespace Battleship {
         PrimaryTile[,] tiles = new PrimaryTile[10, 10];
         List<Ship> Ships = new List<Ship>(5);
         public int Lives { get { return Ships.Select(s => s.UndamagedTiles.Count).Sum(); } }
-        public int Populated { get; set; }
+        public bool Populated { get; set; }
         readonly int[] ClassicShipLengths = { 5, 4, 3, 3, 2 };
 
         public PrimaryTile this[CoordPair cp] {
@@ -32,6 +32,7 @@ namespace Battleship {
         }
 
         public void RandomFill(int seed, Difficulty diff) {
+            if (Populated) tiles = new PrimaryTile[10, 10];
             Random r = new Random(seed);
             CoordSet filled;
             int i = 0;
@@ -64,6 +65,7 @@ namespace Battleship {
 
                     filled = new CoordSet();
                     var ineffective = new CoordSet();
+
                     for (int j = 0; j < 10; j++) {
                         ineffective.Add(new CoordPair(0, j));
                         ineffective.Add(new CoordPair(j, 0));
@@ -74,18 +76,23 @@ namespace Battleship {
                     while (i < 5) {
                         Ship s = Ship.CreateRandom(r, ClassicShipLengths[i]);
                         var shipArea = s.GetOccupiedArea(0);
-                        if (filled.Overlaps(shipArea)) continue;
-                        shipArea.IntersectWith(ineffective);
-                        if (r.NextDouble() < shipArea.Count * 0.3) continue;
 
-                        filled.Add(s.GetOccupiedArea(1));
+                        if (shipArea.Overlaps(filled)) continue;
+
+                        var weakArea = new CoordSet(ineffective);
+                        weakArea.IntersectWith(shipArea);
+                        if (r.NextDouble() < weakArea.Count * 0.4) continue;
+
+                        ineffective.Add(s.GetOccupiedArea(1));
+                        filled.Add(shipArea);
 
                         TryAddShip(s);
                         i++;
                     }
-
                     break;
             }
+            Populated = true;
+            BoardChanged?.Invoke(this, new BoardChangedEventArgs(new CoordPair(), PrimaryTile.Water));
         }
 
         public bool TryAddShip(Ship ship) {

@@ -172,8 +172,8 @@ namespace Battleship {
             }
         }
 
-        //Kissé gyorsabb mintha foreach-el mennénk végig. A sorozatot felbontjuk 16 bites blokkokra, és ha tudjuk
-        //hogy a blokk üres akkor inkább átugorjuk.
+        //Átlagba kissé gyorsabb mintha foreach-el mennénk végig. A sorozatot felbontjuk 16 bites blokkokra,
+        //és ha egy blokk értéke nulla akkor tudjuk hogy a blokk üres és inkább átugorjuk.
         public unsafe CoordPair[] GetAllCoords() {
             CoordPair[] coords = new CoordPair[Count];
 
@@ -188,11 +188,10 @@ namespace Battleship {
                         bitIndex += 16;
                         continue;
                     }
-
-                    for (int i = bitIndex + 16; bitIndex < i; bitIndex++) {
+                    //forciklus liberális használata
+                    for (int i = Math.Min(bitIndex + 16, 100); bitIndex < i; bitIndex++) {
                         if (fields[bitIndex]) {
-                            coords[counter] = new CoordPair(bitIndex);
-                            counter++;
+                            coords[counter++] = new CoordPair(bitIndex);
                         }
                     }
                     block++;
@@ -211,7 +210,7 @@ namespace Battleship {
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
-            throw new NotImplementedException("People using non-generic colletions are either masochists or stupid");
+            return GetEnumerator();
         }
     }
 
