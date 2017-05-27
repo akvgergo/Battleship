@@ -69,7 +69,7 @@ namespace Battleship {
 
         public void SetSource(PrimaryBoard board) {
             Source = board;
-            Source.BoardChanged += (o, e) => Invalidate();
+            Source.TileChanged += (o, e) => Invalidate();
             Invalidate();
         }
 

@@ -18,7 +18,7 @@ namespace Battleship {
             set {
                 var old = tiles[cp.Y, cp.X];
                 tiles[cp.Y, cp.X] = value;
-                BoardChanged?.Invoke(this, new BoardChangedEventArgs(cp, old));
+                TileChanged?.Invoke(this, new TileChangedEventArgs(cp, old));
             }
         }
 
@@ -27,8 +27,13 @@ namespace Battleship {
             set {
                 var old = tiles[y, x];
                 tiles[y, x] = value;
-                BoardChanged?.Invoke(this, new BoardChangedEventArgs(new CoordPair(x, y), old));
+                TileChanged?.Invoke(this, new TileChangedEventArgs(new CoordPair(x, y), old));
             }
+        }
+
+        public PrimaryBoard() {
+            TileChanged += (o, e) => BoardChanged?.Invoke(this, new EventArgs());
+            
         }
 
         public void RandomFill(int seed, Difficulty diff) {
@@ -64,13 +69,13 @@ namespace Battleship {
                 case Difficulty.Hard:
 
                     filled = new CoordSet();
-                    var ineffective = new CoordSet();
+                    var border = new CoordSet();
 
                     for (int j = 0; j < 10; j++) {
-                        ineffective.Add(new CoordPair(0, j));
-                        ineffective.Add(new CoordPair(j, 0));
-                        ineffective.Add(new CoordPair(9, j));
-                        ineffective.Add(new CoordPair(j, 9));
+                        border.Add(new CoordPair(0, j));
+                        border.Add(new CoordPair(j, 0));
+                        border.Add(new CoordPair(9, j));
+                        border.Add(new CoordPair(j, 9));
                     }
 
                     while (i < 5) {
@@ -79,11 +84,11 @@ namespace Battleship {
 
                         if (shipArea.Overlaps(filled)) continue;
 
-                        var weakArea = new CoordSet(ineffective);
+                        var weakArea = new CoordSet(border);
                         weakArea.IntersectWith(shipArea);
                         if (r.NextDouble() < weakArea.Count * 0.4) continue;
 
-                        ineffective.Add(s.GetOccupiedArea(1));
+                        border.Add(s.GetOccupiedArea(1));
                         filled.Add(shipArea);
 
                         TryAddShip(s);
@@ -92,7 +97,7 @@ namespace Battleship {
                     break;
             }
             Populated = true;
-            BoardChanged?.Invoke(this, new BoardChangedEventArgs(new CoordPair(), PrimaryTile.Water));
+            BoardChanged?.Invoke(this, new EventArgs());
         }
 
         public bool TryAddShip(Ship ship) {
@@ -120,13 +125,14 @@ namespace Battleship {
             return false;
         }
 
-        public event EventHandler<BoardChangedEventArgs> BoardChanged;
+        public event EventHandler<TileChangedEventArgs> TileChanged;
+        public event EventHandler BoardChanged;
 
-        public class BoardChangedEventArgs : EventArgs {
+        public class TileChangedEventArgs : EventArgs {
             public CoordPair Location { get; }
             public PrimaryTile OldTile { get; }
 
-            public BoardChangedEventArgs(CoordPair loc, PrimaryTile oldTile) {
+            public TileChangedEventArgs(CoordPair loc, PrimaryTile oldTile) {
                 Location = loc;
                 OldTile = oldTile;
             }

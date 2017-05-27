@@ -14,7 +14,7 @@ namespace Battleship {
             set {
                 var old = tiles[C.Y, C.X];
                 tiles[C.Y, C.X] = value;
-                BoardChanged?.Invoke(this, new BoardChangedEventArgs(C, old));
+                TileChanged?.Invoke(this, new TileChangedEventArgs(C, old));
             }
         }
 
@@ -23,8 +23,12 @@ namespace Battleship {
             set {
                 var old = tiles[y, x];
                 tiles[y, x] = value;
-                BoardChanged?.Invoke(this, new BoardChangedEventArgs(new CoordPair(x, y), old));
+                TileChanged?.Invoke(this, new TileChangedEventArgs(new CoordPair(x, y), old));
             }
+        }
+
+        public TrackerBoard() {
+            TileChanged += (o, e) => BoardChanged?.Invoke(this, new EventArgs());
         }
 
         public void DisplaySet(CoordSet cs) {
@@ -34,13 +38,14 @@ namespace Battleship {
             }
         }
 
-        public event EventHandler<BoardChangedEventArgs> BoardChanged;
+        public event EventHandler<TileChangedEventArgs> TileChanged;
+        public event EventHandler BoardChanged;
 
-        public class BoardChangedEventArgs : EventArgs {
+        public class TileChangedEventArgs : EventArgs {
             public CoordPair Location { get; }
             public TrackerTile OldTile { get; }
 
-            public BoardChangedEventArgs(CoordPair loc, TrackerTile oldTile) {
+            public TileChangedEventArgs(CoordPair loc, TrackerTile oldTile) {
                 Location = loc;
                 OldTile = oldTile;
             }

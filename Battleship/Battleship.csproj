@@ -37,6 +37,9 @@
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Destroyer.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,11 +63,11 @@
     <Compile Include="TrackerBoard.cs" />
     <Compile Include="Coordpair.cs" />
     <Compile Include="CoordSet.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="BattleshipForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="BattleshipForm.Designer.cs">
+      <DependentUpon>BattleshipForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PrimaryBoard.cs" />
     <Compile Include="Program.cs" />
@@ -74,8 +77,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Util.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="BattleshipForm.resx">
+      <DependentUpon>BattleshipForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Destroyer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
