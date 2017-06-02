@@ -35,6 +35,8 @@ namespace Battleship {
         public void BindControls(TrackerBoardControl tracker, PrimaryBoardControl primary) {
             PrimaryControl = primary;
             TrackerControl = tracker;
+            tracker.SetSource(PlayerTracker);
+            primary.SetSource(Player);
             ControlsBound = true;
         }
 
@@ -66,6 +68,15 @@ namespace Battleship {
                 case Difficulty.Hard:
                     break;
             }
+        }
+
+        public event EventHandler<MoveEventArgs> MoveFinished;
+
+        public class MoveEventArgs : EventArgs {
+            public int Round { get; set; }
+            public bool PlayerMove { get; set; }
+            public bool Hit { get; set; }
+            public CoordPair Location { get; set; }
         }
     }
 

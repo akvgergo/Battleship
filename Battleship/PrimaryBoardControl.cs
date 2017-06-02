@@ -64,7 +64,7 @@ namespace Battleship {
         #endregion Properties
 
         public PrimaryBoardControl() {
-
+            DoubleBuffered = true;
         }
 
         public void SetSource(PrimaryBoard board) {

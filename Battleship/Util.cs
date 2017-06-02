@@ -41,6 +41,10 @@ namespace Battleship {
             return NativeMethods.memcmp(byte1, byte2, byte2.Length) == 0;
         }
 
+        public static string ToArgbString(this Color c) {
+            return string.Format("{0}, {1}, {2}, {3}", c.A, c.R, c.G, c.B);
+        }
+
         static class NativeMethods {
             /// <summary>
             /// Assemby-be írt platform-optimális metódus. Ennél sokkal gyorsabb úgyse lesz, úgyhogy ezt egyszerűbb hívni mintha magam
