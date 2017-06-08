@@ -57,6 +57,9 @@
     <Compile Include="AIMemory.cs" />
     <Compile Include="BattleshipGame.cs" />
     <Compile Include="BitVector.cs" />
+    <Compile Include="BoardBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ColorButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,6 +89,18 @@
     </Compile>
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShipPlacerControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ShipPlacerControl.Designer.cs">
+      <DependentUpon>ShipPlacerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShipPlacerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShipPlacerForm.Designer.cs">
+      <DependentUpon>ShipPlacerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TrackerBoard.cs" />
     <Compile Include="Coordpair.cs" />
@@ -129,6 +144,9 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ShipPlacerForm.resx">
+      <DependentUpon>ShipPlacerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -143,16 +161,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Battleships\Battleship.png" />
+    <Resource Include="Resources\Battleships\Cruiser.png" />
     <None Include="Resources\Destroyer.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Battleships\Destroyer.png" />
     <None Include="Resources\gear.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\test.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\book.png" />
+    <Resource Include="Resources\Battleships\Submarine.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Broken ship.png" />
@@ -161,7 +179,16 @@
     <None Include="Resources\ship.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\book.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Source.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Battleships\Carrier.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

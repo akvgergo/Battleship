@@ -22,14 +22,22 @@ namespace Battleship {
 
         public BattleshipForm() {
             InitializeComponent();
+            NewGameButton.Click += InitNewGame;
+            ContinueGameButton.Click += LoadSavedGame;
+            GuideButton.Click += (o, e) => Process.Start("https://en.wikipedia.org/wiki/Battleship");
+            ViewSourceButton.Click += (o, e) => Process.Start("https://github.com/akvgergo/Battleship");
+
             SeedLabel.MouseDoubleClick += HandleSeedlblClick;
             SettingsButton.Click += ShowSettings;
-            NewGameButton.Click += CreateNewGame;
         }
 
-        private void CreateNewGame(object sender, EventArgs e) {
-            MenuPanel.Enabled = false;
-            MenuPanel.Visible = false;
+        private void LoadSavedGame(object sender, EventArgs e) {
+
+        }
+
+        private void InitNewGame(object sender, EventArgs e) {
+            ShipPlacerForm newGameDialog = new ShipPlacerForm();
+            newGameDialog.ShowDialog();
         }
 
         protected override void OnPaint(PaintEventArgs e) {

@@ -10,7 +10,7 @@ using Battleship.Properties;
 
 namespace Battleship {
 
-    public class TrackerBoardControl : Control {
+    public class TrackerBoardControl : BoardBase {
 
         TrackerBoard Source;
 
@@ -19,7 +19,6 @@ namespace Battleship {
         Color _hitColor = Color.Red;
         Color _missColor = Color.Gray;
         Color _unknownColor = Color.LightBlue;
-        float _lineWidth = 3;
 
         public Color HitColor {
             get { return _hitColor; }
@@ -45,19 +44,10 @@ namespace Battleship {
             }
         }
 
-        public float LineWidth {
-            get { return _lineWidth; }
-            set {
-                _lineWidth = value;
-                Invalidate();
-            }
-        }
-
         #endregion Properties
 
         public TrackerBoardControl() {
             MouseClick += HandleClick;
-            DoubleBuffered = true;
         }
 
         private void HandleClick(object sender, MouseEventArgs e) {
@@ -70,26 +60,16 @@ namespace Battleship {
             Invalidate();
         }
 
-        protected override void OnSizeChanged(EventArgs e) {
-            base.OnSizeChanged(e);
-            if (Height != Width) {
-                Height = Width;
-            }
-        }
-
         protected override void OnPaint(PaintEventArgs e) {
-            base.OnPaint(e);
             var g = e.Graphics;
-
-            Pen linePen = new Pen(Enabled ? ForeColor : Color.FromArgb(128, ForeColor), LineWidth);
 
             if (Source != null) {
                 
                 float tileSize = Width / 10f;
 
-                var unknown = new SolidBrush(UnknownColor);
-                var hit = new SolidBrush(HitColor);
-                var miss = new SolidBrush(MissColor);
+                var unknown = new SolidBrush(Enabled ? UnknownColor : UnknownColor.HalveHue());
+                var hit = new SolidBrush(Enabled ? HitColor : HitColor.HalveHue());
+                var miss = new SolidBrush(Enabled ? MissColor : MissColor.HalveHue());
 
                 for (int x = 0; x < 10; x++) {
                     for (int y = 0; y < 10; y++) {
@@ -107,14 +87,7 @@ namespace Battleship {
                     }
                 }
             }
-
-            g.DrawRectangle(linePen, LineWidth / 2, LineWidth / 2, Width - LineWidth, Height - LineWidth);
-
-            for (int i = 1; i < 10; i++) {
-                float loc = Width / 10f * i - LineWidth / 2;
-                g.DrawLine(linePen, loc, 0, loc, Width);
-                g.DrawLine(linePen, 0, loc, Width, loc);
-            }
+            base.OnPaint(e);
         }
     }
 }

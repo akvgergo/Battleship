@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -15,6 +16,11 @@ namespace Battleship {
         public Bitmap Icon { get; set; }
 
         public Color SecondaryForeColor { get; set; }
+        public Color PrimaryForeColor { get; set; }
+
+        Task HighlightTask;
+        CancellationToken HighlightCT;
+        CancellationToken deHighLightCT;
 
         Font _secondaryFont;
         public Font SecondaryFont {
@@ -22,8 +28,14 @@ namespace Battleship {
             set { _secondaryFont = value; }
         }
 
+        Font _primaryFont;
+        public Font PrimaryFont {
+            get { return _primaryFont ?? Font; }
+            set { _primaryFont = value; }
+        }
+
         bool _highlighted = false;
-        public bool HighLight {
+        public bool Highlighted {
             get { return _highlighted; }
             set {
                 _highlighted = value;
@@ -40,32 +52,57 @@ namespace Battleship {
             }
         }
 
+        public bool ShiwIconOnHighLight { get; set; }
+
         public FancyButton() {
             InitializeComponent();
             DoubleBuffered = true;
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
-            MouseEnter += (o, e) => { HighLight = true; ShowIcon = true; };
-            MouseLeave += (o, e) => { HighLight = false; ShowIcon = false; };
+            MouseEnter += (o, e) => { HighlightTask = Highlight(); };
+            MouseLeave += (o, e) => { HighlightTask = Dehighlight(); };
+        }
+
+        public async Task Highlight() {
+            ForeColor = SecondaryForeColor;
+            if (ShiwIconOnHighLight) ShowIcon = true;
+            deHighLightCT = new CancellationToken(true);
+            HighlightCT = new CancellationToken();
+            while (Font.Size < SecondaryFont.Size && PrimaryFont.Size < SecondaryFont.Size) {
+                if (HighlightCT.IsCancellationRequested) return;
+                Font = new Font(SecondaryFont.FontFamily, Font.Size + .5f, SecondaryFont.Style);
+                await Task.Delay(15);
+            }
+        }
+
+        public async Task Dehighlight() {
+            ForeColor = PrimaryForeColor;
+            if (ShiwIconOnHighLight) ShowIcon = false;
+            HighlightCT = new CancellationToken(true);
+            deHighLightCT = new CancellationToken();
+            while (Font.Size > PrimaryFont.Size && SecondaryFont.Size > PrimaryFont.Size) {
+                if (deHighLightCT.IsCancellationRequested) return;
+                Font = new Font(SecondaryFont.FontFamily, Font.Size - .5f, SecondaryFont.Style);
+                await Task.Delay(15);
+            }
         }
 
         protected override void OnPaint(PaintEventArgs pe) {
-            Color actualColor = HighLight ? SecondaryForeColor : ForeColor;
-            Font actualFont = HighLight ? SecondaryFont : Font;
-            Size textSize = TextRenderer.MeasureText(Text, actualFont);
+            Size textSize = TextRenderer.MeasureText(Text, Font);     
+            SolidBrush textBrush = new SolidBrush(Enabled ? ForeColor : ForeColor.HalveHue());
             if (Icon == null || !ShowIcon) {
                 Size = textSize;
-                pe.Graphics.DrawString(Text, actualFont, new SolidBrush(actualColor), new Point());
+                pe.Graphics.DrawString(Text, Font, textBrush, new Point());
                 return;
             }
             Size = new Size(textSize.Width + 32, Math.Max(textSize.Height, 32));
 
             if (textSize.Height > 32) {
                 pe.Graphics.DrawImage(Icon, new Rectangle(0, (textSize.Height - 32) / 2, 32, 32));
-                pe.Graphics.DrawString(Text, actualFont, new SolidBrush(actualColor), new Point(32, 0));
+                pe.Graphics.DrawString(Text, Font, textBrush, new Point(32, 0));
             } else {
                 pe.Graphics.DrawImage(Icon, new Rectangle(0, 0, 32, 32));
-                pe.Graphics.DrawString(Text, actualFont, new SolidBrush(actualColor), new Point(32, (32 - textSize.Height) / 2));
+                pe.Graphics.DrawString(Text, Font, textBrush, new Point(32, (32 - textSize.Height) / 2));
             }
         }
     }

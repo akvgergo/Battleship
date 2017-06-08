@@ -74,72 +74,88 @@
             this.customFLPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.customFLPanel1.Location = new System.Drawing.Point(12, 141);
             this.customFLPanel1.Name = "customFLPanel1";
-            this.customFLPanel1.Size = new System.Drawing.Size(313, 184);
+            this.customFLPanel1.Size = new System.Drawing.Size(313, 219);
             this.customFLPanel1.TabIndex = 8;
             // 
             // NewGameButton
             // 
             this.NewGameButton.BackColor = System.Drawing.Color.Transparent;
-            this.NewGameButton.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.NewGameButton.HighLight = false;
-            this.NewGameButton.Icon = global::Battleship.Properties.Resources.ship;
+            this.NewGameButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.NewGameButton.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.NewGameButton.Highlighted = false;
+            this.NewGameButton.Icon = global::Battleship.Properties.Resources.Ship;
             this.NewGameButton.Location = new System.Drawing.Point(3, 3);
             this.NewGameButton.Name = "NewGameButton";
+            this.NewGameButton.PrimaryFont = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.NewGameButton.PrimaryForeColor = System.Drawing.SystemColors.ControlText;
             this.NewGameButton.SecondaryFont = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NewGameButton.SecondaryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.NewGameButton.ShiwIconOnHighLight = true;
             this.NewGameButton.ShowIcon = false;
-            this.NewGameButton.Size = new System.Drawing.Size(174, 37);
+            this.NewGameButton.Size = new System.Drawing.Size(159, 34);
             this.NewGameButton.TabIndex = 0;
             this.NewGameButton.Text = "New game";
             // 
             // ContinueGameButton
             // 
             this.ContinueGameButton.BackColor = System.Drawing.Color.Transparent;
-            this.ContinueGameButton.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ContinueGameButton.HighLight = false;
+            this.ContinueGameButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ContinueGameButton.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ContinueGameButton.Highlighted = false;
             this.ContinueGameButton.Icon = global::Battleship.Properties.Resources.Broken_ship;
-            this.ContinueGameButton.Location = new System.Drawing.Point(3, 46);
+            this.ContinueGameButton.Location = new System.Drawing.Point(3, 43);
             this.ContinueGameButton.Name = "ContinueGameButton";
+            this.ContinueGameButton.PrimaryFont = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ContinueGameButton.PrimaryForeColor = System.Drawing.SystemColors.ControlText;
             this.ContinueGameButton.SecondaryFont = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ContinueGameButton.SecondaryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ContinueGameButton.ShiwIconOnHighLight = true;
             this.ContinueGameButton.ShowIcon = false;
-            this.ContinueGameButton.Size = new System.Drawing.Size(155, 37);
+            this.ContinueGameButton.Size = new System.Drawing.Size(142, 34);
             this.ContinueGameButton.TabIndex = 1;
             this.ContinueGameButton.Text = "Continue";
             // 
             // GuideButton
             // 
             this.GuideButton.BackColor = System.Drawing.Color.Transparent;
-            this.GuideButton.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.GuideButton.HighLight = false;
-            this.GuideButton.Icon = global::Battleship.Properties.Resources.book;
-            this.GuideButton.Location = new System.Drawing.Point(3, 89);
+            this.GuideButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GuideButton.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.GuideButton.Highlighted = false;
+            this.GuideButton.Icon = ((System.Drawing.Bitmap)(resources.GetObject("GuideButton.Icon")));
+            this.GuideButton.Location = new System.Drawing.Point(3, 83);
             this.GuideButton.Name = "GuideButton";
+            this.GuideButton.PrimaryFont = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.GuideButton.PrimaryForeColor = System.Drawing.SystemColors.ControlText;
             this.GuideButton.SecondaryFont = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.GuideButton.SecondaryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.GuideButton.ShiwIconOnHighLight = true;
             this.GuideButton.ShowIcon = false;
-            this.GuideButton.Size = new System.Drawing.Size(108, 37);
+            this.GuideButton.Size = new System.Drawing.Size(98, 34);
             this.GuideButton.TabIndex = 2;
             this.GuideButton.Text = "Guide";
             // 
             // ViewSourceButton
             // 
             this.ViewSourceButton.BackColor = System.Drawing.Color.Transparent;
-            this.ViewSourceButton.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ViewSourceButton.HighLight = false;
-            this.ViewSourceButton.Icon = global::Battleship.Properties.Resources.Source;
-            this.ViewSourceButton.Location = new System.Drawing.Point(3, 132);
+            this.ViewSourceButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ViewSourceButton.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ViewSourceButton.Highlighted = false;
+            this.ViewSourceButton.Icon = ((System.Drawing.Bitmap)(resources.GetObject("ViewSourceButton.Icon")));
+            this.ViewSourceButton.Location = new System.Drawing.Point(3, 123);
             this.ViewSourceButton.Name = "ViewSourceButton";
+            this.ViewSourceButton.PrimaryFont = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ViewSourceButton.PrimaryForeColor = System.Drawing.SystemColors.ControlText;
             this.ViewSourceButton.SecondaryFont = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ViewSourceButton.SecondaryForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ViewSourceButton.ShiwIconOnHighLight = true;
             this.ViewSourceButton.ShowIcon = false;
-            this.ViewSourceButton.Size = new System.Drawing.Size(207, 37);
+            this.ViewSourceButton.Size = new System.Drawing.Size(186, 34);
             this.ViewSourceButton.TabIndex = 3;
             this.ViewSourceButton.Text = "View Source";
             // 
             // TitlePictureBox
             // 
-            this.TitlePictureBox.Image = global::Battleship.Properties.Resources.test;
+            this.TitlePictureBox.Image = global::Battleship.Properties.Resources.Title;
             this.TitlePictureBox.Location = new System.Drawing.Point(12, 12);
             this.TitlePictureBox.Name = "TitlePictureBox";
             this.TitlePictureBox.Size = new System.Drawing.Size(544, 123);
@@ -163,6 +179,7 @@
             // UIPrimaryBoard
             // 
             this.UIPrimaryBoard.Cursor = System.Windows.Forms.Cursors.Default;
+            this.UIPrimaryBoard.Enabled = false;
             this.UIPrimaryBoard.HitColor = System.Drawing.Color.Red;
             this.UIPrimaryBoard.LineWidth = 3F;
             this.UIPrimaryBoard.Location = new System.Drawing.Point(12, 12);

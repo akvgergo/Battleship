@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.ApplyButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.UserCancelButton = new System.Windows.Forms.Button();
             this.PrimColBox = new System.Windows.Forms.GroupBox();
             this.MissColorBoxPrimary = new Battleship.ColorButton();
             this.HitColorBoxPrimary = new Battleship.ColorButton();
@@ -48,15 +48,15 @@
             this.ApplyButton.Text = "Apply changes";
             this.ApplyButton.UseVisualStyleBackColor = true;
             // 
-            // CancelButton
+            // UserCancelButton
             // 
-            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(212, 251);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(100, 30);
-            this.CancelButton.TabIndex = 1;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
+            this.UserCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.UserCancelButton.Location = new System.Drawing.Point(212, 251);
+            this.UserCancelButton.Name = "UserCancelButton";
+            this.UserCancelButton.Size = new System.Drawing.Size(100, 30);
+            this.UserCancelButton.TabIndex = 1;
+            this.UserCancelButton.Text = "Cancel";
+            this.UserCancelButton.UseVisualStyleBackColor = true;
             // 
             // PrimColBox
             // 
@@ -174,7 +174,7 @@
             this.ClientSize = new System.Drawing.Size(324, 293);
             this.Controls.Add(this.TracColBox);
             this.Controls.Add(this.PrimColBox);
-            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.UserCancelButton);
             this.Controls.Add(this.ApplyButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -195,7 +195,7 @@
         #endregion
 
         private System.Windows.Forms.Button ApplyButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button UserCancelButton;
         private ColorButton WaterColorBoxPrimary;
         private System.Windows.Forms.GroupBox PrimColBox;
         private ColorButton MissColorBoxPrimary;

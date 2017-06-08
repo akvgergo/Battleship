@@ -63,9 +63,19 @@ namespace Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap book {
+        internal static System.Drawing.Bitmap Battleship {
             get {
-                object obj = ResourceManager.GetObject("book", resourceCulture);
+                object obj = ResourceManager.GetObject("Battleship", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Book {
+            get {
+                object obj = ResourceManager.GetObject("Book", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -81,11 +91,41 @@ namespace Battleship.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon Destroyer {
+        internal static System.Drawing.Bitmap Carrier {
+            get {
+                object obj = ResourceManager.GetObject("Carrier", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cruiser {
+            get {
+                object obj = ResourceManager.GetObject("Cruiser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Destroyer {
             get {
                 object obj = ResourceManager.GetObject("Destroyer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon DestroyerIcon {
+            get {
+                object obj = ResourceManager.GetObject("DestroyerIcon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -103,9 +143,9 @@ namespace Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ship {
+        internal static System.Drawing.Bitmap Ship {
             get {
-                object obj = ResourceManager.GetObject("ship", resourceCulture);
+                object obj = ResourceManager.GetObject("Ship", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +163,19 @@ namespace Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap test {
+        internal static System.Drawing.Bitmap Submarine {
             get {
-                object obj = ResourceManager.GetObject("test", resourceCulture);
+                object obj = ResourceManager.GetObject("Submarine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Title {
+            get {
+                object obj = ResourceManager.GetObject("Title", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

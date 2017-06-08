@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.NewGameButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.UserCancelButton = new System.Windows.Forms.Button();
             this.SeedTextBox = new System.Windows.Forms.TextBox();
             this.SeedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -38,15 +38,15 @@
             this.NewGameButton.Text = "New Game";
             this.NewGameButton.UseVisualStyleBackColor = true;
             // 
-            // CancelButton
+            // UserCancelButton
             // 
-            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(93, 51);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 1;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
+            this.UserCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.UserCancelButton.Location = new System.Drawing.Point(93, 51);
+            this.UserCancelButton.Name = "UserCancelButton";
+            this.UserCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.UserCancelButton.TabIndex = 1;
+            this.UserCancelButton.Text = "Cancel";
+            this.UserCancelButton.UseVisualStyleBackColor = true;
             // 
             // SeedTextBox
             // 
@@ -72,7 +72,7 @@
             this.ClientSize = new System.Drawing.Size(180, 82);
             this.Controls.Add(this.SeedLabel);
             this.Controls.Add(this.SeedTextBox);
-            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.UserCancelButton);
             this.Controls.Add(this.NewGameButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -88,7 +88,7 @@
         #endregion
 
         private System.Windows.Forms.Button NewGameButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button UserCancelButton;
         private System.Windows.Forms.TextBox SeedTextBox;
         private System.Windows.Forms.Label SeedLabel;
     }
